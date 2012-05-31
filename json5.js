@@ -160,7 +160,7 @@ JSON5.parse = (function () {
                         } else if (typeof escapee[ch] === 'string') {
                             string += escapee[ch];
                         } else {
-                            break;
+                            string += ch;
                         }
                     } else {
                         string += ch;

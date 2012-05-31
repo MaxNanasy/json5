@@ -5,6 +5,8 @@
     this: 'is a\
  multi-line string',
 
+    'esc\aped': 'non\-escape characters',
+
     // this is an inline comment
     here: 'is another', // inline comment
 
