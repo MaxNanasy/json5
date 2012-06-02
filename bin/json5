@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+var fs = require('fs'),
+    JSON5 = require('../json5'),
+    optimist = require('optimist');
+
+var argv = require('optimist')
+        .usage('Converts JSON5 to JSON.  Reads from stdin by default.\nUsage: $0 [file]')
+        .check(function (argv) {
+            return argv._.length <= 1;
+        })
+        .argv,
+    json5Input = '',
+    inputStream;
+
+argv._.length === 0 ? (inputStream = process.stdin).resume() : inputStream = fs.createReadStream(argv._[0]);
+
+// TODO: Is always using UTF8 for input/output desirable?
+inputStream.on('data', function (data) {
+    json5Input += data;
+});
+inputStream.on('end', function () {
+    process.stdout.write(JSON.stringify(JSON5.parse(json5Input)));
+});
