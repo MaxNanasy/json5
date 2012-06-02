@@ -30,7 +30,7 @@ eval-free [json_parse.js][], making it both secure and robust. Give it a try!
 These are the new features of JSON5's syntax. All of these are optional, and
 all of these are part of ES5 JavaScript.
 
-- Object keys don't need to be quoted if they contain no [special characters](
+- Object keys don't need to be quoted if they're valid [identifiers](
   https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Core_Language_Features#Variables). Yes, even reserved keywords are valid unquoted keys in ES5 [[§11.1.5](http://es5.github.com/#x11.1.5), [§7.6](http://es5.github.com/#x7.6)].
   *[TODO: Unicode characters and escape sequences aren't yet supported in this implementation.]*
 
@@ -42,6 +42,9 @@ all of these are part of ES5 JavaScript.
 - Objects and arrays can have trailing commas.
 
 - Both inline (single-line) and block (multi-line) comments are allowed.
+
+- Numbers can be hexadecimal (base 16), and they can also begin with a leading
+  decimal (e.g. `.5`).
 
 ## Example
 
@@ -58,6 +61,8 @@ all of these are part of ES5 JavaScript.
     
     /* this is a block comment
        that continues on another line */
+
+    hex: 0xDEADbeef,
        
     finally: 'a trailing comma',
     oh: [
@@ -116,7 +121,8 @@ test cases, and ensure that `npm test` continues to pass.
 
 ## License
 
-MIT License. © 2012 Aseem Kishore.
+MIT License. © 2012 Aseem Kishore, and [others](
+https://github.com/aseemk/json5/contributors).
 
 ## Credits
 
@@ -133,3 +139,6 @@ This code is also modeled directly off of Doug's open-source [json_parse.js][]
 parser. I'm super grateful for that clean and well-documented code.
 
 [json_parse.js]: https://github.com/douglascrockford/JSON-js/blob/master/json_parse.js
+
+[Max Nanasy](https://github.com/MaxNanasy) has been an early and prolific
+supporter, contributing multiple patches and ideas. Thanks Max!
