@@ -2,16 +2,22 @@
 
 var fs = require('fs'),
     JSON5 = require('../json5'),
-    optimist = require('optimist');
+    opt = require('opt');
 
-var argv = require('optimist')
-        .usage('Converts JSON5 to JSON.  Reads from stdin by default.\nUsage: $0 [file]')
-        .check(function (argv) {
-            return argv._.length <= 1;
-        })
-        .argv,
-    json5Input = '',
-    inputStream;
+
+opt.setup(
+    'USAGE: ' + process.argv[0] + ' [file]',
+    'SYNOPSIS: Converts JSON5 to JSON.  Reads from stdin by default.',
+    'OPTIONS');
+opt.set(['-h','--help'], opt.usage, "This help document.");
+
+// Parse the command line options
+if (process.argv.length > 1) {
+    console.error(opt.usage());
+    process.exit(1);
+} else {
+    opt.parse(process.argv);
+}
 
 argv._.length === 0 ? (inputStream = process.stdin).resume() : inputStream = fs.createReadStream(argv._[0]);
 
